@@ -1,186 +1,240 @@
 package com.bobocode.fp;
 
-import com.bobocode.model.Account;
 import com.bobocode.util.ExerciseNotCompletedException;
-import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.Month;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.function.*;
 
 /**
- * {@link CrazyStreams} is an exercise class. Each method represent some operation with a collection of accounts that
- * should be implemented using Stream API. Every method that is not implemented yet throws
+ * {@link CrazyLambdas} is an exercise class. Each method returns a functional interface and it should be implemented
+ * using either lambda or a method reference. Every method that is not implemented yet throws
  * {@link ExerciseNotCompletedException}.
  * <p>
- * TODO: remove exception throwing and implement each method using Stream API
+ * TODO: remove exception and implement each method of this class using lambda or method reference
  * <p><p>
  * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk
  */
-@AllArgsConstructor
-public class CrazyStreams {
-    private Collection<Account> accounts;
+public class CrazyLambdas {
 
     /**
-     * Returns {@link Optional} that contains an {@link Account} with the max value of balance
+     * Returns {@link Supplier} that always supply "Hello"
      *
-     * @return account with max balance wrapped with optional
+     * @return a string supplier
      */
-    public Optional<Account> findRichestPerson() {
+    public static Supplier<String> helloSupplier() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link List} of {@link Account} that have a birthday month equal to provided.
+     * Returns a {@link Predicate} of string that checks if string is empty
      *
-     * @param birthdayMonth a month of birth
-     * @return a list of accounts
+     * @return a string predicate
      */
-    public List<Account> findAccountsByBirthdayMonth(Month birthdayMonth) {
+    public static Predicate<String> isEmptyPredicate() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a map that separates all accounts into two lists - male and female. Map has two keys {@code true} indicates
-     * male list, and {@code false} indicates female list.
+     * Return a {@link Function} that accepts {@link String} and returns that string repeated n time, where n is passed
+     * as function argument
      *
-     * @return a map where key is true or false, and value is list of male, and female accounts
+     * @return function that repeats Strings
      */
-    public Map<Boolean, List<Account>> partitionMaleAccounts() {
+    public static BiFunction<String, Integer, String> stringMultiplier() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} that stores accounts grouped by its email domain. A map key is {@link String} which is an
-     * email domain like "gmail.com". And the value is a {@link List} of {@link Account} objects with a specific email domain.
+     * Returns a {@link Function} that converts a {@link BigDecimal} number into a {@link String} that start with
+     * a dollar sign and then gets a value
      *
-     * @return a map where key is an email domain and value is a list of all account with such email
+     * @return function that converts adds dollar sign
      */
-    public Map<String, List<Account>> groupAccountsByEmailDomain() {
+    public static Function<BigDecimal, String> toDollarStringFunction() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a number of letters in all first and last names.
+     * Receives two parameter that represent a range and returns a {@link Predicate<String>} that verifies if string
+     * length is in the specified range. E.g. min <= length < max
      *
-     * @return total number of letters of first and last names of all accounts
+     * @param min min length
+     * @param max max length
+     * @return a string predicate
      */
-    public int getNumOfLettersInFirstAndLastNames() {
+    public static Predicate<String> lengthInRangePredicate(int min, int max) {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a total balance of all accounts.
+     * Returns a {@link Supplier} of random integers
      *
-     * @return total balance of all accounts
+     * @return int supplier
      */
-    public BigDecimal calculateTotalBalance() {
+    public static IntSupplier randomIntSupplier() {
+        throw new ExerciseNotCompletedException();
+    }
+
+
+    /**
+     * Returns an {@link IntUnaryOperator} that receives an int as a bound parameter, and returns a random int
+     *
+     * @return int operation
+     */
+    public static IntUnaryOperator boundedRandomIntSupplier() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link List} of {@link Account} objects sorted by first and last names.
+     * Returns {@link IntUnaryOperator} that calculates an integer square
      *
-     * @return list of accounts sorted by first and last names
+     * @return square operation
      */
-    public List<Account> sortByFirstAndLastNames() {
+    public static IntUnaryOperator intSquareOperation() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Checks if there is at least one account with provided email domain.
+     * Returns a {@link LongBinaryOperator} sum operation.
      *
-     * @param emailDomain
-     * @return true if there is an account that has an email with provided domain
+     * @return binary sum operation
      */
-    public boolean containsAccountWithEmailDomain(String emailDomain) {
+    public static LongBinaryOperator longSumOperation() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns account balance by its email. Throws {@link EntityNotFoundException} with message
-     * "Cannot find Account by email={email}" if account is not found.
+     * Returns a {@link ToIntFunction<String>} that converts string to integer.
      *
-     * @param email account email
-     * @return account balance
+     * @return string to int converter
      */
-    public BigDecimal getBalanceByEmail(String email) {
+    public static ToIntFunction<String> stringToIntConverter() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Collects all existing accounts into a {@link Map} where a key is account id, and the value is {@link Account} instance
+     * Receives int parameter n, and returns a {@link Supplier} that supplies {@link IntUnaryOperator}
+     * that is a function f(x) = n * x
      *
-     * @return map of accounts by its ids
+     * @param n a multiplier
+     * @return a function supplier
      */
-    public Map<Long, Account> collectAccountsById() {
+    public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Filters accounts by the year when an account was created. Collects account balances by its emails into a {@link Map}.
-     * The key is {@link Account#email} and the value is {@link Account#balance}
+     * Returns a {@link UnaryOperator} that accepts str to str function and returns the same function composed with trim
      *
-     * @param year the year of account creation
-     * @return map of account by its ids the were created in a particular year
+     * @return function that composes functions with trim() function
      */
-    public Map<String, BigDecimal> collectBalancesByEmailForAccountsCreatedOn(int year) {
+    public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} where key is {@link Account#lastName} and values is a {@link Set} that contains first names
-     * of all accounts with a specific last name.
+     * Receives a {@link Runnable} parameter, and returns a {@link Supplier<Thread>}. The thread will be started only
+     * when you call supplier method {@link Supplier#get()}
      *
-     * @return a map where key is a last name and value is a set of first names
+     * @param runnable the code you want to tun in new thread
+     * @return a thread supplier
      */
-    public Map<String, Set<String>> groupFirstNamesByLastNames() {
+    public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} where key is a birthday month, and value is a {@link String} that stores comma and space
-     * -separated first names (e.g. "Polly, Dylan, Clark"), of all accounts that have the same birthday month.
+     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in a new thread.
      *
-     * @return a map where a key is a birthday month and value is comma-separated first names
+     * @return a runnable consumer
      */
-    public Map<Month, String> groupCommaSeparatedFirstNamesByBirthdayMonth() {
+    public static Consumer<Runnable> newThreadRunnableConsumer() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} where key is a {@link Month} of {@link Account#creationDate}, and value is total balance
-     * of all accounts that have the same value creation month.
+     * Returns a {@link Function} that accepts an instance of {@link Runnable} and returns a {@link Supplier} of a
+     * started {@link Thread} that is created from a given {@link Runnable}
      *
-     * @return a map where key is a creation month and value is total balance of all accounts created in that month
+     * @return a function that transforms runnable into a thread supplier
      */
-    public Map<Month, BigDecimal> groupTotalBalanceByCreationMonth() {
+    public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} where key is a letter {@link Character}, and value is a number of its occurrences in
-     * {@link Account#firstName}.
+     * Returns a {@link BiFunction} that has two parameters. First is {@link IntUnaryOperator} which is some integer function.
+     * Second is {@link IntPredicate} which is some integer condition. And the third is {@link IntUnaryOperator} which is
+     * a new composed function that uses provided predicate (second parameter of binary function) to verify its input
+     * parameter. If predicate returns {@code true} it applies a provided integer function
+     * (first parameter of binary function) and returns a result value, otherwise it returns an element itself.
      *
-     * @return a map where key is a letter and value is its count in all first names
+     * @return a binary function that receiver predicate and function and compose them to create a new function
      */
-    public Map<Character, Long> getCharacterFrequencyInFirstNames() {
+    public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Returns a {@link Map} where key is a letter {@link Character}, and value is a number of its occurrences ignoring
-     * case, in all {@link Account#firstName} and {@link Account#lastName} that are equal or longer than nameLengthBound.
-     * Inside the map, all letters should be stored in lower case.
+     * Returns a {@link BiFunction} which first parameter is a {@link Map} where key is a function name, and value is some
+     * {@link IntUnaryOperator}, and second parameter is a {@link String} which is a function name. If the map contains a
+     * function by a given name then it is returned by high order function otherwise an identity() is returned.
      *
-     * @return a map where key is a letter and value is its count ignoring case in all first and last names
+     * @return a high-order function that fetches a function from a function map by a given name or returns identity()
      */
-    public Map<Character, Long> getCharacterFrequencyIgnoreCaseInFirstAndLastNames(int nameLengthBound) {
+    public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
         throw new ExerciseNotCompletedException();
     }
 
+    /**
+     * Returns a comparator of type T that is comparing values extracted using the provided mapper function.
+     * <p>
+     * E.g. imagine you need to compare accounts by their balance values.
+     * <pre>{@code
+     * Comparator<Account> balanceComparator = comparing(Account::getBalance);
+     * }</pre>
+     * <p>
+     * PLEASE NOTE, that @{@link Comparator} is a functional interface, and you should manually write a lambda expression
+     * to implement it.
+     *
+     * @param mapper a mapper function that allows to map an object to a comparable value
+     * @return a comparator instance
+     */
+    public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> mapper) {
+        throw new ExerciseNotCompletedException();
+    }
+
+    /**
+     * Returns a comparator of type T that uses a provided comparator to compare objects, and only if they are equal
+     * it's comparing values extracted using the provided mapper function.
+     * <p>
+     * E.g. suppose you want to compare accounts by balance, but in case two people have the same balance you want to
+     * compare their first names:
+     * <pre>{@code
+     * Comparator<Account> accountComparator = thenComparing(balanceComparator, Account::getFirstName);
+     * }</pre>
+     * <p>
+     *
+     * @param comparator an initial comparator
+     * @param mapper     a mapper function that is used to extract values when initial comparator returns zero
+     * @return a comparator instance
+     */
+    public static <T, U extends Comparable<? super U>> Comparator<T> thenComparing(
+            Comparator<? super T> comparator, Function<? super T, ? extends U> mapper) {
+        throw new ExerciseNotCompletedException();
+    }
+
+    /**
+     * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE!".
+     *
+     * @return a supplier instance
+     */
+    public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
+        throw new ExerciseNotCompletedException();
+    }
 }
-
